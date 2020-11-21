@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head on>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    <title>La banda dei babbi natale</title>
+</head>
+<body>
+    <video playsinline autoplay muted loop>
+        <source src="Christmas_Tree_Bokeh.mp4">
+    </video>
+
+        <div class="wrapper">
+            <div class="scelta-babbo-wrapper">
+                
+                <h1 id="titolo">Inserisci qui il tuo nome e scopri chi sarà il tuo babbo!🎅</h1>
+
+                    <input id="user-input" type="text" class="input-user" required placeholder="Inserisci nome qui">
+                    <br>
+                    <button id="submit" class="submit-button" onclick="add()" type="submit">
+                        Dimmi il mio babbo!🎁 
+                    </button>
+                                   
+                <p id="answer"></p>
+            </div>
+            
+        </div>
+        <table id="admin-controls">
+            <tr>
+                <td>
+                    <button onclick="setNomi()">
+                    Reset Nomi
+                    </button>
+                </td>
+                <td>
+                    <button class="colse-admin-controls" onclick="toggleAdminControls()">
+                        X
+                    </button>
+                </td>
+            </tr>
+        </table>
+            
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+</body>
+</html>
