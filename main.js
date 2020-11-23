@@ -46,19 +46,6 @@ window.addEventListener("keydown", (event) =>{
         }
     })
 
-    /*
-    var combTast = []
-    if (combTast.length < 2){
-        combTast.push(event.key)
-    }
-    else{
-        combTast.push(event.key)
-        combTast.shift()
-    }
-    if (combTast.length == 2){
-        if (combTast[0] == "Shift" && combTast[1].toLowerCase() == "p"){
-        toggleAdminControls()
-    }}*/
     
 })
 
