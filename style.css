@@ -9,12 +9,16 @@ button{
 input{
     width: 90%;
 }
+
 .wrapper{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 454px;
+    height: 315px;
 }
+
 .scelta-babbo-wrapper{
     display: block;
     max-width: 400px;
