@@ -11,7 +11,7 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore()
-var combTast = []
+
 
 document.body.onload = () =>{
     
@@ -30,8 +30,24 @@ document.body.onload = () =>{
         document.getElementById("submit").innerHTML = "🎊   " +  abbinValue.charAt(0).toUpperCase() + abbinValue.slice(1) + "   🎉"
     }
 }
-    
+
+
 window.addEventListener("keydown", (event) =>{
+    let display = document.getElementById("adminControls").style.display
+    window.addEventListener("keydown", (evn) =>{
+        if (event.key == "Shift" && evn.key == "P"){
+            console.log('ok')
+            if (document.getElementById("adminControls").style.display == "none"){
+                document.getElementById("adminControls").style.display = "block"
+            }
+            else {
+                document.getElementById("adminControls").style.display = "none"
+            }
+        }
+    })
+
+    /*
+    var combTast = []
     if (combTast.length < 2){
         combTast.push(event.key)
     }
@@ -42,7 +58,7 @@ window.addEventListener("keydown", (event) =>{
     if (combTast.length == 2){
         if (combTast[0] == "Shift" && combTast[1].toLowerCase() == "p"){
         toggleAdminControls()
-    }}
+    }}*/
     
 })
 

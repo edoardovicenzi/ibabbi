@@ -68,12 +68,8 @@ margin-top: 10px;
 .submit-button-clicked:hover{
     cursor: not-allowed;
 }
-#admin-controls{
-    display: none;
-    position: relative;
-}
 #combNum{
-    color: white;
+    color: rgb(0, 217, 255);
 }
 .colse-admin-controls{
     background-color: red;
