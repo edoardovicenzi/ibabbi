@@ -156,3 +156,12 @@ async function add(){
         
     
 }
+
+function getColLen() {
+    db.collection('asset').doc('combinazioni').get()
+    .then(doc =>{
+            document.getElementById('combNum').innerHTML = Object.keys(doc.data()).length    
+    }).catch( err =>{
+        document.getElementById('combNum').innerHTML = err
+    })
+}

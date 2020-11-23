@@ -72,6 +72,9 @@ margin-top: 10px;
     display: none;
     position: relative;
 }
+#combNum{
+    color: white;
+}
 .colse-admin-controls{
     background-color: red;
 }
