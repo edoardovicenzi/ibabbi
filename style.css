@@ -78,7 +78,7 @@ margin-top: 10px;
 .submit-button-clicked:hover{
     cursor: not-allowed;
 }
-#combNum{
+.output{
     color: black;
     background-color: white;
     text-align: center;

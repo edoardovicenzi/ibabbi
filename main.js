@@ -36,7 +36,6 @@ window.addEventListener("keydown", (event) =>{
     let display = document.getElementById("adminControls").style.display
     window.addEventListener("keydown", (evn) =>{
         if (event.key == "Shift" && evn.key == "P"){
-            console.log('ok')
             if (document.getElementById("adminControls").style.display == "none"){
                 document.getElementById("adminControls").style.display = "block"
             }
@@ -62,6 +61,13 @@ function getRandomArbitrary(max) {
     return Math.floor(Math.random() * max)
 }
 
+function setCookie (n, v){
+    let d = new Date()
+    d.setTime(d.getTime +(365*24*60*60*1000))
+    let expires = "; expires=" + d.toUTCString()
+    document.cookie = "nome=" + n + expires + "; SameSite=Lax"
+    document.cookie = "abbin=" + v + expires + "; SameSite=Lax"
+}
 async function getAll(){
 var assets = []
     
@@ -96,6 +102,13 @@ async function updateFirestore(array, combin){
         nomiArray : array})
 }
 
+function setOutput(result){
+    document.getElementById("user-input").setAttribute("disabled", "true")
+    document.getElementById("submit").setAttribute("disabled", "true")
+    document.getElementById("submit").className = "submit-button-clicked"
+    document.getElementById("submit").style= "background-color: rgba(36, 36, 36, 0.945)"
+    document.getElementById("submit").innerHTML = "🎊" + result.charAt(0).toUpperCase() + result.slice(1) + "🎉"
+}
 async function add(){
 
     if (document.getElementById('user-input').value){
@@ -107,43 +120,56 @@ async function add(){
         let base = data[0][0].base
         let nomiArray = data[0][2].nomiArray
         let comb = {}
+        let combArray = data[0][1]
+        
         let nome = document.getElementById('user-input').value.toLowerCase()
 
-        if (base.indexOf(nome.toLowerCase()) == -1){
+        if (base.indexOf(nome) == -1){
             document.getElementById("answer").innerHTML = "E tu chi saresti? Non sei sulla lista dei buoni!"
         }
         else{
-            document.getElementById("answer").innerHTML = ""
-            document.getElementById("user-input").setAttribute("disabled", "true")
-            document.getElementById("submit").setAttribute("disabled", "true")
-            document.getElementById("submit").className = "submit-button-clicked"
-            document.getElementById("submit").style= "background-color: rgba(36, 36, 36, 0.945)"
-
-
-            if (nomiArray.length < 1){
-                document.getElementById("submit").innerHTML = "Sono finiti i babbi!"
+            if (Object.keys(combArray).indexOf(nome) > -1){
+                setOutput(combArray[nome])
+                setCookie(nome, combArray[nome])
             }
+            else{
 
-            if (base.indexOf(nome) > -1){
-                let ran = getRandomArbitrary(nomiArray.length)
-                while (nomiArray[ran] == nome){
+                document.getElementById("answer").innerHTML = ""
 
-                    ran = getRandomArbitrary(nomiArray.length)
 
+                if (nomiArray.length < 1){
+                    document.getElementById("submit").innerHTML = "Sono finiti i babbi!"
                 }
-
-                fieldValue = nomiArray[ran]
-                let d = new Date()
-                d.setTime(d.getTime +(365*24*60*60*1000))
-                let expires = "; expires=" + d.toUTCString()
-                document.cookie = "nome=" + nome + expires + "; SameSite=Lax"
-                document.cookie = "abbin=" + fieldValue + expires + "; SameSite=Lax"
-                document.getElementById("submit").innerHTML = "🎊" + fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1) + "🎉"
-
-
-                comb[nome] = fieldValue
-                nomiArray.splice(ran, 1)
-                updateFirestore(nomiArray, comb)
+                else{
+                    let arrayNoCopy = nomiArray.filter(el =>{
+                        return !(el == nome)
+                        })
+                    if (nomiArray.length > 2){
+                        let ran = getRandomArbitrary(arrayNoCopy.length)
+                        setCookie(nome, nomiArray[ran])
+                        setOutput(arrayNoCopy[ran])
+                        comb[nome] = arrayNoCopy[ran]
+                        nomiArray.splice(nomiArray.indexOf(arrayNoCopy[ran]), 1)
+                        updateFirestore(nomiArray, comb)  
+                    }
+                    else{
+                        if (nomiArray.indexOf(nome) > -1){
+                            setCookie(nome, nomiArray[ran])
+                            setOutput(arrayNoCopy[0])
+                            comb[nome] = arrayNoCopy[0]
+                            nomiArray.splice(nomiArray.indexOf(arrayNoCopy[0]), 1)
+                            updateFirestore(nomiArray, comb) 
+                        }
+                        else{
+                            setCookie(nome, nomiArray[ran])
+                            setOutput(nomiArray[0])
+                            comb[nome] = nomiArray[0]
+                            nomiArray.splice(nomiArray[0], 1)
+                            updateFirestore(nomiArray, comb)
+                        }
+                    }
+                    
+                }  
             }
         }
 
@@ -167,4 +193,8 @@ function getColLen() {
     }).catch( err =>{
         document.getElementById('combNum').innerHTML = err
     })
+}
+
+function getColKeys(){
+    
 }
