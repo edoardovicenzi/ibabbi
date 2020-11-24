@@ -12,6 +12,24 @@ var firebaseConfig = {
 
 const db = firebase.firestore()
 
+async function getAll(){
+var assets = []
+    
+    const getAll = await db.collection("asset").get().then(
+        snap =>{
+        let rawData = []
+        snap.forEach(
+            doc =>{
+                rawData.push(doc.data())
+            });
+        return assets.push(rawData);
+    
+    }).catch(err => {
+        console.log(err.Code)
+        console.log(err.message)
+    })
+    return assets
+}
 
 document.body.onload = () =>{
     
@@ -19,21 +37,24 @@ document.body.onload = () =>{
         let subString =  document.cookie.split(";", 2)
         let nameValue = ""
         let abbinValue = ""
-
         document.cookie = ""
         document.cookie = ""
-
         document.cookie = "nome"+ "=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
         document.cookie = "abbin"+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
-
-        abbinValue = subString[1].split("=")[1]
-        nameValue = subString[0].split("=")[1]
-        document.getElementById("user-input").setAttribute("disabled", "true")
-        document.getElementById("user-input").setAttribute("placeholder", nameValue.charAt(0).toUpperCase() + nameValue.slice(1))
-        document.getElementById("submit").setAttribute("disabled", "true")
-        document.getElementById("submit").className = "submit-button-clicked"
-        document.getElementById("submit").style= "background-color: rgba(36, 36, 36, 0.945)"
-        document.getElementById("submit").innerHTML = "🎊   " +  abbinValue.charAt(0).toUpperCase() + abbinValue.slice(1) + "   🎉"
+        nameValue = subString[0].split("=")[subString[0].split("=").indexOf('name')+1]
+        console.log(nameValue)
+        db.collection('asset').doc('combinazioni').get()
+        .then(doc =>{
+            abbinValue = doc.data()[nameValue].toString()
+            document.getElementById("user-input").setAttribute("disabled", "true")
+            document.getElementById("user-input").setAttribute("placeholder", nameValue.charAt(0).toUpperCase() + nameValue.slice(1))
+            document.getElementById("submit").setAttribute("disabled", "true")
+            document.getElementById("submit").className = "submit-button-clicked"
+            document.getElementById("submit").style= "background-color: rgba(36, 36, 36, 0.945)"
+            document.getElementById("submit").innerHTML = "🎊   " +  abbinValue.charAt(0).toUpperCase() + abbinValue.slice(1) + "   🎉"
+        })
+        
+        
     }
 }
 
@@ -69,31 +90,12 @@ function getRandomArbitrary(max) {
 
 function setCookie (n, v){
     let d = new Date()
-        d.setTime(d.getTime +(365*24*60*60*1000))
+        d.setTime(d.getTime +(31*24*60*60*1000))
         let expires = "; expires=" + d.toUTCString()
-        document.cookie = "name=" + n + expires + "; SameSite=Lax"
-        document.cookie = "abbina=" + v + expires + "; SameSite=Lax"
-    
+        document.cookie = "name=" + n + expires + "; SameSite=Lax"  
 }
 
-async function getAll(){
-var assets = []
-    
-    const getAll = await db.collection("asset").get().then(
-        snap =>{
-        let rawData = []
-        snap.forEach(
-            doc =>{
-                rawData.push(doc.data())
-            });
-        return assets.push(rawData);
-    
-    }).catch(err => {
-        console.log(err.Code)
-        console.log(err.message)
-    })
-    return assets
-}
+
 
 async function setNomi(){
     let data =await getAll()
