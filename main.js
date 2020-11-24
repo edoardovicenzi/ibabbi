@@ -20,6 +20,12 @@ document.body.onload = () =>{
         let nameValue = ""
         let abbinValue = ""
 
+        document.cookie = ""
+        document.cookie = ""
+
+        document.cookie = "nome"+ "=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+        document.cookie = "abbin"+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+
         abbinValue = subString[1].split("=")[1]
         nameValue = subString[0].split("=")[1]
         document.getElementById("user-input").setAttribute("disabled", "true")
@@ -33,20 +39,20 @@ document.body.onload = () =>{
 
 
 window.addEventListener("keydown", (event) =>{
-    let display = document.getElementById("adminControls").style.display
+    let adControl = document.getElementById("adminControls")
     window.addEventListener("keydown", (evn) =>{
         if (event.key == "Shift" && evn.key == "P"){
-            if (document.getElementById("adminControls").style.display == "none"){
-                document.getElementById("adminControls").style.display = "block"
+            if (adControl.style.display == "none"){
+                adControl.style.display = "block"
             }
             else {
-                document.getElementById("adminControls").style.display = "none"
+                adControl.style.display = "none"
             }
         }
-    })
-
-    
+    })  
 })
+
+
 
 function toggleAdminControls () {
     if (document.getElementById("admin-controls").style.display == "none"){
@@ -63,11 +69,13 @@ function getRandomArbitrary(max) {
 
 function setCookie (n, v){
     let d = new Date()
-    d.setTime(d.getTime +(365*24*60*60*1000))
-    let expires = "; expires=" + d.toUTCString()
-    document.cookie = "nome=" + n + expires + "; SameSite=Lax"
-    document.cookie = "abbin=" + v + expires + "; SameSite=Lax"
+        d.setTime(d.getTime +(365*24*60*60*1000))
+        let expires = "; expires=" + d.toUTCString()
+        document.cookie = "name=" + n + expires + "; SameSite=Lax"
+        document.cookie = "abbina=" + v + expires + "; SameSite=Lax"
+    
 }
+
 async function getAll(){
 var assets = []
     
@@ -196,5 +204,10 @@ function getColLen() {
 }
 
 function getColKeys(){
-    
+    db.collection('asset').doc('combinazioni').get()
+    .then(doc =>{
+            document.getElementById('colKeys').innerHTML = Object.keys(doc.data())  
+    }).catch( err =>{
+        document.getElementById('colKeys').innerHTML = err
+    })
 }
