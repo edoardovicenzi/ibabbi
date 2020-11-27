@@ -154,8 +154,8 @@ async function add(){
                     let arrayNoCopy = nomiArray.filter(el =>{
                         return !(el == nome)
                         })
+                    let ran = getRandomArbitrary(arrayNoCopy.length)
                     if (nomiArray.length > 2){
-                        let ran = getRandomArbitrary(arrayNoCopy.length)
                         setCookie(nome, nomiArray[ran])
                         setOutput(arrayNoCopy[ran])
                         comb[nome] = arrayNoCopy[ran]
