@@ -39,8 +39,8 @@ document.body.onload = () =>{
         let abbinValue = ""
         document.cookie = ""
         document.cookie = ""
-        document.cookie = "nome"+ "=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
-        document.cookie = "abbin"+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+        document.cookie = "nome"+ "=; expires=Thu, 01 Jan 2021 00:00:00 UTC"
+        document.cookie = "abbin"+"=; expires=Thu, 01 Jan 2021 00:00:00 UTC"
         nameValue = subString[0].split("=")[subString[0].split("=").indexOf('name')+1]
         console.log(nameValue)
         db.collection('asset').doc('combinazioni').get()
@@ -77,10 +77,10 @@ window.addEventListener("keydown", (event) =>{
 
 function toggleAdminControls () {
     if (document.getElementById("admin-controls").style.display == "none"){
-            document.getElementById("admin-controls").style.display = "block"
+            document.getElementById("adminControls").style.display = "block"
         }
         else {
-            document.getElementById("admin-controls").style.display = "none"
+            document.getElementById("adminControls").style.display = "none"
         }
 }
 
@@ -103,6 +103,7 @@ async function setNomi(){
     db.collection('asset').doc('remaining').set({
         nomiArray : setArray
     })
+    db.collection('asset').doc('combinazioni').set({})
 }
 
 async function updateFirestore(array, combin){
