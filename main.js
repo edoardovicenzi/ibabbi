@@ -39,19 +39,21 @@ document.body.onload = () =>{
         let abbinValue = ""
         document.cookie = ""
         document.cookie = ""
-        document.cookie = "nome"+ "=; expires=Thu, 01 Jan 2021 00:00:00 UTC"
-        document.cookie = "abbin"+"=; expires=Thu, 01 Jan 2021 00:00:00 UTC"
+        document.cookie = "nome"+ "=; expires=Thu, 01 Jan 2020 00:00:00 UTC"
+        document.cookie = "abbin"+"=; expires=Thu, 01 Jan 2020 00:00:00 UTC"
         nameValue = subString[0].split("=")[subString[0].split("=").indexOf('name')+1]
         console.log(nameValue)
         db.collection('asset').doc('combinazioni').get()
         .then(doc =>{
-            abbinValue = doc.data()[nameValue].toString()
+            if (abbinValue = doc.data()[nameValue]){
+                abbinValue = doc.data()[nameValue].toString()
+            document.getElementById("submit").innerHTML = "🎊   " +  abbinValue.charAt(0).toUpperCase() + abbinValue.slice(1) + "   🎉"
+            }
             document.getElementById("user-input").setAttribute("disabled", "true")
             document.getElementById("user-input").setAttribute("placeholder", nameValue.charAt(0).toUpperCase() + nameValue.slice(1))
             document.getElementById("submit").setAttribute("disabled", "true")
             document.getElementById("submit").className = "submit-button-clicked"
             document.getElementById("submit").style= "background-color: rgba(36, 36, 36, 0.945)"
-            document.getElementById("submit").innerHTML = "🎊   " +  abbinValue.charAt(0).toUpperCase() + abbinValue.slice(1) + "   🎉"
         })
         
         
@@ -106,11 +108,8 @@ async function setNomi(){
     db.collection('asset').doc('combinazioni').set({})
 }
 
-async function updateFirestore(array, combin){
+async function updateFirestore(combin){
     db.collection('asset').doc('combinazioni').set(combin, {merge: true})
-
-    db.collection('asset').doc('remaining').set({
-        nomiArray : array})
 }
 
 function setOutput(result){
@@ -120,6 +119,16 @@ function setOutput(result){
     document.getElementById("submit").style= "background-color: rgba(36, 36, 36, 0.945)"
     document.getElementById("submit").innerHTML = "🎊" + result.charAt(0).toUpperCase() + result.slice(1) + "🎉"
 }
+
+function mescola(array){
+    array.forEach((nome, index) => {
+        let nextNome = array.filter(el => {return !(el == nome)})[Math.floor(Math.random() * (array.length-1)) ? Math.floor(Math.random() * (array.length-1)) : 0 ]
+        let nextIndex = array.indexOf(nextNome)
+        array[index] = nextNome
+        array[nextIndex] = nome
+    })
+    return array
+}
 async function add(){
 
     if (document.getElementById('user-input').value){
@@ -128,23 +137,24 @@ async function add(){
         document.getElementById("user-input").style.color = "black"
         document.getElementById("user-input").style.border = "none"
         let data = await getAll()
-        let base = data[0][0].base
+        let baseDown = data[0][0].base
         let nomiArray = data[0][2].nomiArray
         let comb = {}
         let combArray = data[0][1]
         
         let nome = document.getElementById('user-input').value.toLowerCase()
-
+        let base = mescola(baseDown)
         if (base.indexOf(nome) == -1){
             document.getElementById("answer").innerHTML = "E tu chi saresti? Non sei sulla lista dei buoni!"
         }
         else{
-            if (Object.keys(combArray).indexOf(nome) > -1){
+
+            if (Object.keys(combArray).indexOf(nome) > -1) {
                 setOutput(combArray[nome])
                 setCookie(nome, combArray[nome])
             }
+            
             else{
-
                 document.getElementById("answer").innerHTML = ""
 
 
@@ -152,35 +162,33 @@ async function add(){
                     document.getElementById("submit").innerHTML = "Sono finiti i babbi!"
                 }
                 else{
-                    let arrayNoCopy = nomiArray.filter(el =>{
-                        return !(el == nome)
-                        })
-                    let ran = getRandomArbitrary(arrayNoCopy.length)
-                    if (nomiArray.length > 2){
-                        setCookie(nome, nomiArray[ran])
-                        setOutput(arrayNoCopy[ran])
-                        comb[nome] = arrayNoCopy[ran]
-                        nomiArray.splice(nomiArray.indexOf(arrayNoCopy[ran]), 1)
-                        updateFirestore(nomiArray, comb)  
+                    ///////////////////////////////////////////////////////////////////////
+                let altri = base.filter((el) => {return !(el == nome)})
+                //se le combinazioni non ci sono crea la prima
+                if (Object.keys(comb).length < 0){
+                //genero una combinazione a caso
+                comb[nome] = altri[Math.floor(Math.random() * (altri.length))]
+                }
+                else{
+                    let elSenzaComb = altri.filter(el => {return ((Object.keys(combArray).indexOf(el) == -1) && (Object.values(combArray).indexOf(el) == -1))})
+                    //se ci sono elementi senza combinazioni scegline uno tra questi
+                    if (elSenzaComb.length > 0) {
+                    comb[nome] = elSenzaComb[Math.floor(Math.random() * (elSenzaComb.length))]
                     }
+                    //se tutti gli altri hanno scelto qualcuno, scegli uno che non è stato già scelto
                     else{
-                        if (nomiArray.indexOf(nome) > -1){
-                            setCookie(nome, nomiArray[ran])
-                            setOutput(arrayNoCopy[0])
-                            comb[nome] = arrayNoCopy[0]
-                            nomiArray.splice(nomiArray.indexOf(arrayNoCopy[0]), 1)
-                            updateFirestore(nomiArray, comb) 
-                        }
-                        else{
-                            setCookie(nome, nomiArray[ran])
-                            setOutput(nomiArray[0])
-                            comb[nome] = nomiArray[0]
-                            nomiArray.splice(nomiArray[0], 1)
-                            updateFirestore(nomiArray, comb)
-                        }
+                        let rimanenti = altri.filter(el => {return (Object.values(combArray).indexOf(el) == -1)})
+                        comb[nome] = rimanenti[Math.floor(Math.random() * rimanenti.length)]
                     }
-                    
-                }  
+                }
+                //setCookie
+                setCookie(nome, comb[nome])
+                //set DOM
+                setOutput(comb[nome])
+                //aggiorno la combinazione
+                updateFirestore(comb)
+//////////////////////////////////////////////////////////////////////////////////// arrayNoCopy = altri 
+                } 
             }
         }
 
