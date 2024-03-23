@@ -1,72 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head on>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
-    <title>🎅 La banda dei babbi natale 🎅</title>
-</head>
-<body>
-    <video playsinline autoplay muted loop poster="poster.png">
-        <source src="Christmas_Tree_Bokeh.mp4">
-    </video>
-
-        <div class="wrapper">
-            <div class="scelta-babbo-wrapper">
-                
-                <h1 id="titolo">Inserisci qui il tuo nome e scopri chi sarà il tuo babbo!🎅</h1>
-
-                    <input id="user-input" type="text" class="input-user" required placeholder="Inserisci nome qui">
-                    <br>
-                    <button id="submit" class="submit-button" onclick="add()" type="submit">
-                        Dimmi il mio babbo!🎁 
-                    </button>
-                                   
-                <p id="answer"></p>
-            </div>
-            
-        </div>
-        <div id="adminControls" style="display: none;">
-            <table >
-                <tr>
-                    <td>
-                        <button onclick="setNomi()">
-                        Reset Nomi
-                        </button>
-                    </td>
-                    <td>
-                        <button onclick="getColLen()">
-                        Comb
-                        </button>
-                    </td>
-                    <td>
-                        <button onclick="getColKeys()">
-                        CombKeys
-                        </button>
-                    </td>
-                    <td>
-                        <button class="colse-admin-controls" onclick="toggleAdminControls()">
-                            X
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <p id="combNum" class="output"></p>
-                    </td>
-                    <td>
-                        <p id="colKeys" class="output"></p>
-                    </td>
-                    <td></td>
-                </tr>
-                
-            </table>
-            
-        </div>
-            
-        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="./src/assets/Logo.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!---Import box icons-->
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!---Import google fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+        <title>La banda dei babbi natale</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
 </html>
