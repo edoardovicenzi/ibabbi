@@ -10,7 +10,7 @@ import SecretFriend, {loader as namesLoader} from './components/SecretFriend.jsx
 
 const router = createBrowserRouter([
     {
-        path: "/ibabbi/",
+        path: "/",
         element: <App />,
         errorElement: <ErrorPage />,
         children: [
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
 
         ]
     }
-])
+], {basename: "/ibabbi"})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
