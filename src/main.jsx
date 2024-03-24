@@ -14,12 +14,8 @@ const router = createBrowserRouter([
         element: <App />,
         errorElement: <ErrorPage />,
         children: [
-            { 
-                element: <Navigate to="/ibabbi/home" replace />
-            },
             {
-                index: true,
-                path: "/ibabbi/home",
+                path: "/ibabbi/",
                 element: <Home />
             },
             {
