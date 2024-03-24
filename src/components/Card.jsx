@@ -8,7 +8,7 @@ export default function Card({title = "Placeholder", content = "Placeholder", na
     <div className="card-wrapper">
             <h2 className="card-title">{title}</h2>
             <p className="card-content">{content}</p>
-            <button className="btn btn-default" onClick={()=> navigate("/" +navTo)}>Continua</button>
+            <button className="btn btn-default" onClick={()=> navigate("/ibabbi/" +navTo)}>Continua</button>
         </div>
     )
 }

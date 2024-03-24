@@ -17,7 +17,7 @@ export default function ErrorPage({msg =""}){
                         <i>{error.statusText || error.message}</i>
                     </p>
                 </div>
-                <button className="btn" onClick={() => navigate("/home")}>Ritorna alla Home</button>
+                <button className="btn" onClick={() => navigate("/ibabbi/home")}>Ritorna alla Home</button>
 
             </div>
         </div>
