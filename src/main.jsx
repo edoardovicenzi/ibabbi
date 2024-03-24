@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './style.css'
-import { BrowserRouter, Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './components/App.jsx'
 import Home from './components/Home.jsx'
 import ErrorPage from './components/ErrorPage.jsx'
@@ -46,12 +46,10 @@ const router = createBrowserRouter([
 
         ]
     }
-])
+], {basename: "/ibabbi"})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <BrowserRouter basename='/ibabbi'>
-            <RouterProvider router={router} />
-        </BrowserRouter>
+        <RouterProvider router={router} />
     </React.StrictMode>,
 )
