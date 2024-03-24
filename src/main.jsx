@@ -15,10 +15,10 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { 
-                index: true,
                 element: <Navigate to="/ibabbi/home" replace />
             },
             {
+                index: true,
                 path: "/ibabbi/home",
                 element: <Home />
             },
