@@ -9,9 +9,9 @@ export default function App(){
         <>
             <nav>
                 <ul>
-                    <li><Link to={'christmas'}>Natale segreto</Link></li>
-                    <li><Link to={'home'}><img className="logo-default" src={logo} alt="Home" /></Link></li>
-                    <li><Link to={'easter'}>Pasqua segreta</Link></li>
+                    <li><Link to={'/ibabbi/christmas'}>Natale segreto</Link></li>
+                    <li><Link to={'/ibabbi/home'}><img className="logo-default" src={logo} alt="Home" /></Link></li>
+                    <li><Link to={'/ibabbi/easter'}>Pasqua segreta</Link></li>
                 </ul>
             </nav>
             <Outlet />
