@@ -10,7 +10,7 @@ import SecretFriend, {loader as namesLoader} from './components/SecretFriend.jsx
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/ibabbi",
         element: <App />,
         errorElement: <ErrorPage />,
         children: [
