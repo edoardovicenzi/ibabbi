@@ -61,7 +61,13 @@ export default function CreateList({festivity ="christmas"}){
             names: listaNomi,
             combinations: selectSecretFriends(listaNomi, 5),
         }
-
+        /*
+            console.group()
+        for (const el of data.combinations) {
+            console.log("Name: " + el.name + "\nSecret name: " + el.secretFriend.name)
+            console.groupEnd()
+        }
+        */
         const ref = await addDoc(collectionRef, data)
         return navigate(ref.id)
     }

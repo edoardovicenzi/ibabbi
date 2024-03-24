@@ -13,8 +13,8 @@ const ACTIONS = {
 
 export async function loader({params}){
     const path = window.location.href
-    if (path.match("christmas")) return getNames("christmas",params.id)
-    else if (path.match("easter")) return getNames("easter",params.id)
+    if (path.match("christmas")) return await getNames("christmas",params.id)
+    else if (path.match("easter")) return await getNames("easter",params.id)
 }
 export default function SecretFriend({festivity = "christmas"}){
     const data = useLoaderData()
