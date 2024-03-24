@@ -10,7 +10,7 @@ import SecretFriend, {loader as namesLoader} from './components/SecretFriend.jsx
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/ibabbi/",
         element: <App />,
         errorElement: <ErrorPage />,
         children: [
@@ -19,26 +19,26 @@ const router = createBrowserRouter([
                 element: <Navigate to="/home" replace />
             },
             {
-                path: "/home",
+                path: "/ibabbi/home",
                 element: <Home />
             },
             {
-                path: "/christmas",
+                path: "/ibabbi/christmas",
                 element: <CreateList />,
                 errorElement: <ErrorPage />,
             },
             {
-                path: "/easter",
+                path: "/ibabbi/easter",
                 element: <CreateList festivity='easter'/>,
                 errorElement: <ErrorPage />,
             },
             {
-                path: "/christmas/:id",
+                path: "/ibabbi/christmas/:id",
                 loader: namesLoader,
                 element: <SecretFriend />
             },
             {
-                path: "/easter/:id",
+                path: "/ibabbi/easter/:id",
                 loader: namesLoader,
                 element: <SecretFriend festivity="easter" />
             }
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
 
         ]
     }
-], {basename: "/ibabbi"})
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
