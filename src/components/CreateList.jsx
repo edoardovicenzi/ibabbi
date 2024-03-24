@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react"
 import db from "../utilities/api"
 import {useNavigate} from "react-router-dom"
 import ValidationError from "./ValidationError"
-import selectSecretFriends from "../utilities/NamesArray"
 
 export default function CreateList({festivity ="christmas"}){
     const [nuovoNome, setNuovoNome] = useState("")
@@ -30,6 +29,19 @@ export default function CreateList({festivity ="christmas"}){
     function handleCodeNavigation(){
         return navigate(code.current.value)
     }
+    //selects all the secret friends from an array where friends structure is {id: id, name:name}
+    function selectSecretFriends(namesArr = []){
+        let mixedNames = namesArr.sort(() => Math.random()- 0.5)
+        for (let i = 0; i < mixedNames.length; i++){
+            const currentName = namesArr[i]
+            let nextIndex = (i+1) % mixedNames.length
+            let nextName = mixedNames[nextIndex]
+            currentName.secretFriend = {id : nextName.id,name : nextName.name}
+        }
+
+        return mixedNames
+    }
+
     async function handleSubmit(e){
         e.preventDefault()
         if (listaNomi.length < 3) return setValidation(false)
@@ -49,8 +61,8 @@ export default function CreateList({festivity ="christmas"}){
             names: listaNomi,
             combinations: selectSecretFriends(listaNomi, 5),
         }
-        const ref = await addDoc(collectionRef, data)
 
+        const ref = await addDoc(collectionRef, data)
         return navigate(ref.id)
     }
 
