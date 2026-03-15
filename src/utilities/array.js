@@ -20,11 +20,3 @@ export function selectSecretFriends(namesArr = []) {
     secretFriend: shuffled[i],
   }));
 }
-
-const friends = [
-  { id: 1, name: "Alice" },
-  { id: 2, name: "Bob" },
-  { id: 3, name: "Charlie" },
-];
-
-console.log(selectSecretFriends(friends));
