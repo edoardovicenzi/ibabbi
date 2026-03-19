@@ -1,34 +1,42 @@
 {
-    "name": "ibabbi",
-    "homepage": "https://edoardovicenzi.github.io/ibabbi/",
-    "private": true,
-    "version": "0.0.0",
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "predeploy": "npm run build",
-        "deploy": "gh-pages -d dist",
-        "build": "vite build",
-        "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
-    },
-    "dependencies": {
-        "firebase": "^10.9.0",
-        "react": "^18.2.0",
-        "react-device-detect": "^2.2.3",
-        "react-dom": "^18.2.0",
-        "react-router": "^6.22.3",
-        "react-router-dom": "^6.22.3"
-    },
-    "devDependencies": {
-        "@types/react": "^18.2.64",
-        "@types/react-dom": "^18.2.21",
-        "@vitejs/plugin-react": "^4.2.1",
-        "eslint": "^8.57.0",
-        "eslint-plugin-react": "^7.34.0",
-        "eslint-plugin-react-hooks": "^4.6.0",
-        "eslint-plugin-react-refresh": "^0.4.5",
-        "gh-pages": "^6.1.1",
-        "vite": "^5.1.6"
-    }
+  "name": "ibabbi",
+  "homepage": "https://edoardovicenzi.github.io/ibabbi/",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "predeploy": "pnpm run build",
+    "deploy": "gh-pages -d dist",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@knadh/oat": "^0.4.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.5.0",
+    "@types/react-router-dom": "^5.3.3",
+    "firebase": "^10.9.0",
+    "react": "^19.2.4",
+    "react-device-detect": "^2.2.3",
+    "react-dom": "^19.2.4",
+    "react-router": "^7.13.1",
+    "react-router-dom": "^7.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.64",
+    "@types/react-dom": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^10.0.3",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "gh-pages": "^6.1.1",
+    "typescript": "^5.9.3",
+    "vite": "^5.1.6"
+  }
 }

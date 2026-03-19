@@ -1,4 +1,6 @@
-export function shuffle(array) {
+import type { Person, PersonSecretFriend } from "../types";
+
+export function shuffle(array: Person[]): Person[] {
   const arr = [...array];
 
   for (let i = arr.length - 1; i > 0; i--) {
@@ -9,8 +11,10 @@ export function shuffle(array) {
   return arr;
 }
 //selects all the secret friends from an array where friends structure is {id: id, name:name}
-export function selectSecretFriends(namesArr = []) {
-  let shuffled;
+export function generateSecretFriends(
+  namesArr: Person[],
+): PersonSecretFriend[] {
+  let shuffled: Person[];
 
   do {
     shuffled = shuffle(namesArr);
