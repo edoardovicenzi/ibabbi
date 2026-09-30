@@ -1,0 +1,6 @@
+[tools]
+node = { version = "24" , postinstall = "node --version" }
+pnpm = { version = "latest" , postinstall = "pn -v" }
+
+[hooks]
+postinstall = "pn install"
