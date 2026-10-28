@@ -1,6 +1,7 @@
 [tools]
-node = { version = "24" , postinstall = "node --version" }
-pnpm = { version = "latest" , postinstall = "pn -v" }
+elixir = { version = "1.20.4-otp-29", postinstall = "mix archive.install hex phx_new" }
+erlang = "29.1.2"
 
-[hooks]
-postinstall = "pn install"
+[tasks]
+
+dev = "mix deps.get; mix phx.server"

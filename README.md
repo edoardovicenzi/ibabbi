@@ -1,8 +1,18 @@
-# React + Vite
+# Ibabbi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To start your Phoenix server:
 
-Currently, two official plugins are available:
+* Run `mix setup` to install and setup dependencies
+* Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+Ready to run in production? Please [check our deployment guides](https://phoenix.hexdocs.pm/deployment.html).
+
+## Learn more
+
+* Official website: https://www.phoenixframework.org/
+* Guides: https://phoenix.hexdocs.pm/overview.html
+* Docs: https://phoenix.hexdocs.pm
+* Forum: https://elixirforum.com/c/phoenix-forum
+* Source: https://github.com/phoenixframework/phoenix
