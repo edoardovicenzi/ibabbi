@@ -4,4 +4,4 @@ erlang = "29.1.2"
 
 [tasks]
 
-dev = "mix deps.get; mix phx.server"
+dev = "mix setup && mix phx.server"
